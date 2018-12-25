@@ -1,0 +1,89 @@
+[
+    {
+        "id": "8a45da72.e30f78",
+        "type": "tab",
+        "label": "check point 3",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "5ddb954d.355a8c",
+        "type": "debug",
+        "z": "8a45da72.e30f78",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 750,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4f823a14.8383b4",
+        "type": "inject",
+        "z": "8a45da72.e30f78",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "aea26a8a.d08408"
+            ]
+        ]
+    },
+    {
+        "id": "aea26a8a.d08408",
+        "type": "function",
+        "z": "8a45da72.e30f78",
+        "name": "payload",
+        "func": "msg.headers={\n    deviceKey:\"d0iDd0HeUnioG310\"\n};\nmsg.payload=\"Temperature,,99.9\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 370,
+        "y": 140,
+        "wires": [
+            [
+                "c776c33a.45eb"
+            ]
+        ]
+    },
+    {
+        "id": "c776c33a.45eb",
+        "type": "http request",
+        "z": "8a45da72.e30f78",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://api.mediatek.com/mcs/v2/devices/Ds7jNCWY/datapoints.csv",
+        "tls": "",
+        "x": 530,
+        "y": 140,
+        "wires": [
+            [
+                "6a3dc95d.dae1b8",
+                "5ddb954d.355a8c"
+            ]
+        ]
+    },
+    {
+        "id": "6a3dc95d.dae1b8",
+        "type": "http response",
+        "z": "8a45da72.e30f78",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 750,
+        "y": 80,
+        "wires": [],
+        "icon": "node-red/alert.png"
+    }
+]

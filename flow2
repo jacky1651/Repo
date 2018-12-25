@@ -1,0 +1,108 @@
+[
+    {
+        "id": "20d5e53f.27e62a",
+        "type": "tab",
+        "label": "check point 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "6e2724c4.082ffc",
+        "type": "debug",
+        "z": "20d5e53f.27e62a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 830,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "6276fb99.8d7a94",
+        "type": "inject",
+        "z": "20d5e53f.27e62a",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "59ed0aac.d32ce4"
+            ]
+        ]
+    },
+    {
+        "id": "59ed0aac.d32ce4",
+        "type": "function",
+        "z": "20d5e53f.27e62a",
+        "name": "payload",
+        "func": "msg.headers={\n    deviceKey:\"d0iDd0HeUnioG310\"\n};\n//msg.payload=\"Temperature,,99.9\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 450,
+        "y": 140,
+        "wires": [
+            [
+                "fe107848.5fd428",
+                "3a7a4902.e1d6c6"
+            ]
+        ]
+    },
+    {
+        "id": "fe107848.5fd428",
+        "type": "http request",
+        "z": "20d5e53f.27e62a",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://api.mediatek.com/mcs/v2/devices/Ds7jNCWY/datachannels/Temperature/datapoints.csv",
+        "tls": "",
+        "x": 610,
+        "y": 100,
+        "wires": [
+            [
+                "c9f64d21.5647c",
+                "6e2724c4.082ffc"
+            ]
+        ]
+    },
+    {
+        "id": "c9f64d21.5647c",
+        "type": "http response",
+        "z": "20d5e53f.27e62a",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 830,
+        "y": 80,
+        "wires": [],
+        "icon": "node-red/alert.png"
+    },
+    {
+        "id": "3a7a4902.e1d6c6",
+        "type": "http request",
+        "z": "20d5e53f.27e62a",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://api.mediatek.com/mcs/v2/devices/Ds7jNCWY/datachannels/Humidity/datapoints.csv",
+        "tls": "",
+        "x": 610,
+        "y": 180,
+        "wires": [
+            [
+                "c9f64d21.5647c",
+                "6e2724c4.082ffc"
+            ]
+        ]
+    }
+]
